@@ -4,6 +4,7 @@
 #include <QStringList>
 #include <QDateTime>
 #include <QFile>
+//#include <QDir>
 
 #include <QDebug>
 
@@ -12,6 +13,9 @@ HttpDaemon::HttpDaemon(): QTcpServer()
     qDebug() << "HttpDaemon : New instance was created";
 
     listen(QHostAddress::Any);
+
+    //QDir example = QDir(":/");
+    //qDebug() << example.;
 }
 
 void HttpDaemon::incomingConnection(int socket)
