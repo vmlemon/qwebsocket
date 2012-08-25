@@ -30,6 +30,9 @@ void HttpDaemon::incomingConnection(int socket)
 void HttpDaemon::readClient()
 {
     QTcpSocket* socket = (QTcpSocket*)sender();
+
+
+
     if (socket->canReadLine())
     {
         QTextStream os(socket);
@@ -43,7 +46,7 @@ void HttpDaemon::readClient()
 
         qDebug() << "HttpDaemon : Client request body elements:" << tokens;
 
-        qDebug() << "HttpDaemon : Client data line(s): \n\r" << clientData;
+        qDebug() << "HttpDaemon : Client data line(s): \n\r" << QString(socket->readAll());;
 
         QRegExp pathPattern("^/websocket\\.(html|js)$");
         if (pathPattern.exactMatch(tokens[1]))
