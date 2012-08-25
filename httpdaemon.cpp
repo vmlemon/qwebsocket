@@ -70,7 +70,7 @@ void HttpDaemon::readClient()
 
         /* The client requested the forms test page */
 
-        if (wsPathPattern.exactMatch(tokens[1]))
+        if (formsPathPattern.exactMatch(tokens[1]))
         {
 
             qDebug() << "HttpDaemon : Forms test page requested";
