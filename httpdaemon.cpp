@@ -54,13 +54,13 @@ void HttpDaemon::readClient()
         qDebug() << "HttpDaemon : Client data line(s): \n\r" << QString(socket->readAll());;
 
         /* The client requested a WebSocket proxy file*/
-        QRegExp pathPattern("^/websocket\\.(html|js)$");
-        if (pathPattern.exactMatch(tokens[1]))
+        QRegExp wsPathPattern("^/websocket\\.(html|js)$");
+        if (wsPathPattern.exactMatch(tokens[1]))
         {
 
             qDebug() << "HttpDaemon : WebSockets proxy requested";
 
-            QFile file (":" + pathPattern.capturedTexts()[0]);
+            QFile file (":" + wsPathPattern.capturedTexts()[0]);
             file.open(QFile::ReadOnly);
             os << file.readAll()
                << "\n\n";
