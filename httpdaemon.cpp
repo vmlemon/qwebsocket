@@ -42,7 +42,10 @@ void HttpDaemon::readClient()
         QString clientData = QString(socket->readLine());
         QStringList tokens = clientData.split(QRegExp("[ \r\n][ \r\n]*"));
 
-        qDebug() << "HttpDaemon : Client request body elements:" << tokens;
+        QString tokenSize = "(" + QString::number(tokens.size()) + ")";
+
+        qDebug() << "HttpDaemon : Client request body elements:" << tokens
+                 << tokenSize;
 
         qDebug() << "HttpDaemon : Client data line(s): \n\r" << QString(socket->readAll());;
 
