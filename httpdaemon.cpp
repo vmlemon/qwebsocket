@@ -31,8 +31,6 @@ void HttpDaemon::readClient()
 {
     QTcpSocket* socket = (QTcpSocket*)sender();
 
-
-
     if (socket->canReadLine())
     {
         QTextStream os(socket);
