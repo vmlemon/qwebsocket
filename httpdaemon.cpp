@@ -62,7 +62,7 @@ void HttpDaemon::readClient()
 
         else
 
-            /* The client wanted the home directory, or something else */
+        /* The client wanted the home directory, or something else */
         {
             qDebug() << "HttpDaemon : HTTP root directory requested";
 
