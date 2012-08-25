@@ -58,7 +58,11 @@ void HttpDaemon::readClient()
             os << file.readAll()
                << "\n\n";
         }
+
+
         else
+
+            /* The client wanted the home directory, or something else */
         {
             qDebug() << "HttpDaemon : HTTP root directory requested";
 
