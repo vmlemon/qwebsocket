@@ -25,6 +25,8 @@ void HttpDaemon::incomingConnection(int socket)
     s->setSocketDescriptor(socket);
 }
 
+
+
 void HttpDaemon::readClient()
 {
     QTcpSocket* socket = (QTcpSocket*)sender();
@@ -36,7 +38,8 @@ void HttpDaemon::readClient()
             "Content-Type: text/html; charset=\"utf-8\"\r\n"
             "\r\n";
 
-        QStringList tokens = QString(socket->readLine()).split(QRegExp("[ \r\n][ \r\n]*"));
+        QString clientData = QString(socket->readLine());
+        QStringList tokens = clientData.split(QRegExp("[ \r\n][ \r\n]*"));
 
         qDebug() << "HttpDaemon : Client request body elements:" << tokens;
 
