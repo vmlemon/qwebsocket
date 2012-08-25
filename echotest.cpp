@@ -4,6 +4,7 @@
 
 #include "ui_echotest.h"
 #include "qwebsocket.h"
+#include <QDebug>
 
 class EchoTest: public QWidget
 {
