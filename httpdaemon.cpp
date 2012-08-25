@@ -5,13 +5,20 @@
 #include <QDateTime>
 #include <QFile>
 
+#include <QDebug>
+
 HttpDaemon::HttpDaemon(): QTcpServer()
 {
+    qDebug() << "HttpDaemon : New instance was created";
+
     listen(QHostAddress::Any);
 }
 
 void HttpDaemon::incomingConnection(int socket)
 {
+
+    qDebug() << "HttpDaemon : Incoming connection on socket " << socket;
+
     QTcpSocket* s = new QTcpSocket(this);
     connect(s, SIGNAL(readyRead()), this, SLOT(readClient()));
     connect(s, SIGNAL(disconnected()), this, SLOT(discardClient()));
