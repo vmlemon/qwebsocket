@@ -46,12 +46,17 @@ QWebSocket::QWebSocket(const QUrl &url, QObject *parent)
 {
     HttpDaemon *daemon = new HttpDaemon;
 
+    qDebug() << "QWebSocket : New instance was created";
+    qDebug() << "QWebSocket : URL is" << url;
+
     bridge = new Bridge(this);
     bridge->url = url;
 
     webView = new QWebView();
     connect(webView->page()->currentFrame(), SIGNAL(javaScriptWindowObjectCleared()), SLOT(addBridge()));
     webView->load(QUrl(QString("http://127.0.0.1:%1/websocket.html").arg(daemon->serverPort())));
+
+    qDebug() << "QWebSocket : Server seems to be listening on:" << daemon->serverPort();
 }
 
 void QWebSocket::send(const QByteArray &data)

@@ -38,9 +38,14 @@ void HttpDaemon::readClient()
 
         QStringList tokens = QString(socket->readLine()).split(QRegExp("[ \r\n][ \r\n]*"));
 
+        qDebug() << "HttpDaemon : Client request body elements:" << tokens;
+
         QRegExp pathPattern("^/websocket\\.(html|js)$");
         if (pathPattern.exactMatch(tokens[1]))
         {
+
+            qDebug() << "HttpDaemon : WebSockets proxy requested";
+
             QFile file (":" + pathPattern.capturedTexts()[0]);
             file.open(QFile::ReadOnly);
             os << file.readAll()
@@ -48,6 +53,8 @@ void HttpDaemon::readClient()
         }
         else
         {
+            qDebug() << "HttpDaemon : HTTP root directory requested";
+
             os << "<h1>Nothing to see here</h1>\n\n";
         }
 
