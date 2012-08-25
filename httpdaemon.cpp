@@ -17,7 +17,7 @@ HttpDaemon::HttpDaemon(): QTcpServer()
 void HttpDaemon::incomingConnection(int socket)
 {
 
-    qDebug() << "HttpDaemon : Incoming connection on socket " << socket;
+    qDebug() << "HttpDaemon : Incoming connection on socket" << socket;
 
     QTcpSocket* s = new QTcpSocket(this);
     connect(s, SIGNAL(readyRead()), this, SLOT(readClient()));

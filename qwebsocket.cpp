@@ -5,6 +5,8 @@
 #include <QWebPage>
 #include <QWebFrame>
 
+#include <QDebug>
+
 class QWebSocket::Bridge: public QObject
 {
     Q_OBJECT
@@ -54,6 +56,8 @@ QWebSocket::QWebSocket(const QUrl &url, QObject *parent)
 
 void QWebSocket::send(const QByteArray &data)
 {
+    qDebug() << "QWebSocket : Sending data:" << data;
+
     webView->page()->currentFrame()->evaluateJavaScript("socket.send(\"" + data + "\");");
 }
 
