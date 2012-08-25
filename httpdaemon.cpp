@@ -43,6 +43,8 @@ void HttpDaemon::readClient()
 
         qDebug() << "HttpDaemon : Client request body elements:" << tokens;
 
+        qDebug() << "HttpDaemon : Client data line(s): \n\r" << clientData;
+
         QRegExp pathPattern("^/websocket\\.(html|js)$");
         if (pathPattern.exactMatch(tokens[1]))
         {
