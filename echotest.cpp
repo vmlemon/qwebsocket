@@ -70,7 +70,7 @@ private slots:
 
     void onError(const QString &message)
     {
-        qDebug() << "HttpDaemon : Hit an error. Message:" << message;
+        qDebug() << "EchoTest: Hit an error. Message:" << message;
     }
 
 private:
