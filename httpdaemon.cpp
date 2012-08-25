@@ -6,6 +6,8 @@
 #include <QFile>
 //#include <QDir>
 
+#include <QTextStream>
+
 #include <QDebug>
 
 HttpDaemon::HttpDaemon(): QTcpServer()
@@ -56,6 +58,7 @@ void HttpDaemon::readClient()
         /* The client requested a WebSocket proxy file*/
         QRegExp wsPathPattern("^/websocket\\.(html|js)$");
         QRegExp formsPathPattern("^/formstest\\.(html|js)$");
+        QRegExp settingsPattern("^/allsettings$");
 
         if (wsPathPattern.exactMatch(tokens[1]))
         {
@@ -81,6 +84,16 @@ void HttpDaemon::readClient()
                << "\n\n";
         }
 
+        /* The client requested a list of settings */
+
+        else if (settingsPattern.exactMatch(tokens[1]))
+        {
+
+            qDebug() << "HttpDaemon : Settings page requested";
+
+            os << "Server settings: \r\n";
+               //<< QString(iPersistentStore.allKeys()) << "\n\n";
+        }
         else
 
         /* The client wanted the home directory, or something else */
