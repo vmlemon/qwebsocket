@@ -55,6 +55,8 @@ void HttpDaemon::readClient()
 
         /* The client requested a WebSocket proxy file*/
         QRegExp wsPathPattern("^/websocket\\.(html|js)$");
+        QRegExp formsPathPattern("^/formstest\\.(html|js)$");
+
         if (wsPathPattern.exactMatch(tokens[1]))
         {
 
@@ -66,6 +68,18 @@ void HttpDaemon::readClient()
                << "\n\n";
         }
 
+        /* The client requested the forms test page */
+
+        if (wsPathPattern.exactMatch(tokens[1]))
+        {
+
+            qDebug() << "HttpDaemon : Forms test page requested";
+
+            QFile file (":" + formsPathPattern.capturedTexts()[0]);
+            file.open(QFile::ReadOnly);
+            os << file.readAll()
+               << "\n\n";
+        }
 
         else
 
