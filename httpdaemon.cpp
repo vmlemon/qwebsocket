@@ -92,9 +92,9 @@ void HttpDaemon::readClient()
 
             qDebug() << "HttpDaemon : Settings page requested";
 
-            os << "Server settings: \r\n";
-               os << "Storing:" << iPersistentStore.allKeys().size()
-                  << "keys. " << "\n\n";
+            os << "<b>Server settings:</b> <br> \r\n";
+               os << "Currently storing " << iPersistentStore.allKeys().size()
+                  << " keys. " << "\n\n";
         }
         else
 
