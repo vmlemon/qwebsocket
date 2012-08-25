@@ -18,6 +18,8 @@ HttpDaemon::HttpDaemon(): QTcpServer()
     //qDebug() << example.;
 }
 
+QSettings iPersistentStore("Tyson Key", "AudioPlayer");
+
 void HttpDaemon::incomingConnection(int socket)
 {
 
@@ -28,8 +30,6 @@ void HttpDaemon::incomingConnection(int socket)
     connect(s, SIGNAL(disconnected()), this, SLOT(discardClient()));
     s->setSocketDescriptor(socket);
 }
-
-
 
 void HttpDaemon::readClient()
 {
@@ -96,6 +96,34 @@ void HttpDaemon::readClient()
             delete socket;
     }
 }
+
+/* Persistent storage of settings */
+
+#ifndef Q_OS_SYMBIAN
+QVariant Backplane::ReadSetting(QString aUnifiedKey, QVariant aDefaultValue) {
+    return iPersistentStore.value(aUnifiedKey, aDefaultValue);
+
+    qDebug() << "Read: " << iPersistentStore.value(aUnifiedKey, "").toString();
+}
+
+void Backplane::WriteSetting(QString aSubsystem, QString aKeyName, QString aKeyValue) {
+    QString unifiedKey = aSubsystem + "/" + aKeyName;
+    iPersistentStore.setValue(unifiedKey, aKeyValue);
+
+    qDebug() << "Stored: " << iPersistentStore.applicationName() << unifiedKey + ", " + aKeyValue;
+}
+
+/* Overload WriteSetting() to support storage of boolean values */
+
+void Backplane::WriteSetting(QString aSubsystem, QString aKeyName, bool aKeyValue) {
+    QString unifiedKey = aSubsystem + "/" + aKeyName;
+    iPersistentStore.setValue(unifiedKey, aKeyValue);
+
+    qDebug() << "Stored: " << iPersistentStore.applicationName() << unifiedKey + ", " + QString::number(aKeyValue);
+}
+
+#endif
+
 
 void HttpDaemon::discardClient()
 {
