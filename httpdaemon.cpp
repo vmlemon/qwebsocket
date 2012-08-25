@@ -5,6 +5,7 @@
 #include <QDateTime>
 #include <QFile>
 //#include <QDir>
+#include <QString>
 
 #include <QTextStream>
 
@@ -92,7 +93,8 @@ void HttpDaemon::readClient()
             qDebug() << "HttpDaemon : Settings page requested";
 
             os << "Server settings: \r\n";
-               //<< QString(iPersistentStore.allKeys()) << "\n\n";
+               os << "Storing:" << iPersistentStore.allKeys().size()
+                  << "keys. " << "\n\n";
         }
         else
 
